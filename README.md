@@ -1,2 +1,8 @@
-# node-api-project
-An API project using Express.js and Node.js
+# Satellite Locator
+A live satellite locator
+
+## Technologies Used
+- Node.js
+- Express.js
+- Google API
+- ISS API
