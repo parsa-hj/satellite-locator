@@ -3,17 +3,41 @@
 <head>
   <title>ISS Location</title>
   <link rel="stylesheet" href="/styles/styles.css">
-  <script src="https://maps.googleapis.com/maps/api/js?key=<%= GOOGLE_MAPS_API_KEY %>&callback=initMap" async defer></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%= GOOGLE_MAPS_API_KEY %>&callback=initMap"></script>
   <script src="/map.js"></script>
 </head>
 <body>
-  <h1>ISS Current Location</h1>
-  <p>Latitude: <%= lat %></p>
-  <p>Longitude: <%= long %></p>
-  <p>GPS version: <%= lat %>, <%= long %></p>
-
+  <div class="container">
+    <div class="header">
+      <h1>ISS Current Location</h1>
+    </div>
   
-  <div id="map" data-lat="<%= lat %>" data-long="<%= long %>"></div> <!-- The map will be rendered inside this div -->
+    <div class="center-container">
+      <button type="button" class="btn btn-primary" id="showButton">Display Location</button>
+    </div>
+  
+    <div class="container text-center hidden long-lat">
+      <div class="row">
+        <div class="col">
+          <div class="shadow p-3 mb-5 bg-body rounded"><h4>Latitude: <%= lat %></h4></div>
+        </div>
+        <div class="col">
+          <div class="shadow p-3 mb-5 bg-body rounded"><h4>Longitude: <%= long %></h4></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="shadow p-3 mb-5 bg-body rounded"><h4>Coordinates: <%= lat %>, <%= long %></h4></div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="google-map hidden center-container">
+      <div id="map" data-lat="<%= lat %>" data-long="<%= long %>"></div> <!-- The map will be rendered inside this div -->
+    </div>
+  </div>
 
 </body>
 </html>

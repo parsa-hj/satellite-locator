@@ -2,3 +2,22 @@
     height: 600px;
     width: 600px;
 }
+
+.hidden {
+    display: none;
+}
+
+.header h1 {
+    text-align: center;
+    margin-top: 50px;
+}
+
+#showButton {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.center-container {
+    display: flex;
+    justify-content: center;
+}
