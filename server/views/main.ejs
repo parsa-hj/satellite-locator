@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ISS Location</title>
+  <link rel="stylesheet" href="/styles/styles.css">
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%= GOOGLE_MAPS_API_KEY %>&callback=initMap" async defer></script>
+  <script src="/map.js"></script>
+</head>
+<body>
+  <h1>ISS Current Location</h1>
+  <p>Latitude: <%= lat %></p>
+  <p>Longitude: <%= long %></p>
+  <p>GPS version: <%= lat %>, <%= long %></p>
+
+  
+  <div id="map" data-lat="<%= lat %>" data-long="<%= long %>"></div> <!-- The map will be rendered inside this div -->
+
+</body>
+</html>
