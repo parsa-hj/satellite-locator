@@ -13,4 +13,4 @@ The Live International Satellite Station Locator is a dynamic web application th
 2. Install dependencies: `npm install`
 3. Set up API keys: Replace `YOUR_ISS_API_KEY` and `YOUR_GOOGLE_MAPS_API_KEY` in the respective places.
 4. Run the server: `npm start`
-5. Access the application in your browser: `http://localhost:3000`
+5. Access the application in your browser: `http://localhost:4000`
