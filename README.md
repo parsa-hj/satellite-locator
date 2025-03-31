@@ -1,8 +1,9 @@
 # Satellite Locator
-The Live International Satellite Station Locator is a dynamic web application that allows users to track and explore the International Space Station (ISS) in real-time. By leveraging the ISS API and Google Maps API, this project provides an interactive and informative platform to visualize the current positions of satellites as they orbit the Earth.
+The Live International Satellite Station Locator is a dynamic web application that allows users to track and explore the International Space Station (ISS) in real-time. By leveraging the ISS API and Google Maps API, this project provides an interactive and informative platform to visualize the current position of the satellite as it orbits the Earth.
 
 ## Demo
-<img src="" width="600"><br/>
+![iss-location-project](https://github.com/user-attachments/assets/09e4a77b-7527-4795-aa35-ab1b36872bdc)
+
 
 ## Technologies Used
 - Node.js
