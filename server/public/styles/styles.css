@@ -39,17 +39,16 @@ body {
   padding: 12px 32px;
   font-size: 1.1rem;
   font-weight: 500;
-  background: linear-gradient(135deg, #4caf50, #45a049);
+  background: #429945;
   border: none;
   border-radius: 8px;
   color: white;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
 }
 
 #showButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+  background: #45a049;
 }
 
 .center-container {
