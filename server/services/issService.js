@@ -39,40 +39,6 @@ class ISSService {
   }
 
   /**
-   * Fetch ISS pass times for a specific location
-   * @param {number} lat - Latitude
-   * @param {number} lon - Longitude
-   * @param {number} alt - Altitude in meters (default: 0)
-   * @param {number} n - Number of passes to return (default: 5)
-   * @returns {Promise<Object>} Pass times data
-   */
-  async getPassTimes(lat, lon, alt = 0, n = 5) {
-    try {
-      const response = await axios.get(API_CONFIG.ISS_PASS_URL, {
-        params: { lat, lon, alt, n },
-        timeout: API_CONFIG.REQUEST_TIMEOUT,
-      });
-
-      if (response.data.message !== "success") {
-        throw new Error("Invalid response from ISS Pass API");
-      }
-
-      return {
-        request: response.data.request,
-        passes: response.data.response,
-      };
-    } catch (error) {
-      if (error.code === "ECONNABORTED") {
-        throw new Error("ISS Pass API request timeout");
-      }
-      if (error.response) {
-        throw new Error(`ISS Pass API error: ${error.response.status}`);
-      }
-      throw new Error(`Failed to fetch ISS pass times: ${error.message}`);
-    }
-  }
-
-  /**
    * Fetch multiple position samples for trajectory calculation
    * @param {number} samples - Number of samples to collect (default: 3)
    * @param {number} interval - Interval between samples in ms (default: 2000)

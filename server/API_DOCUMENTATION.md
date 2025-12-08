@@ -6,7 +6,6 @@ A RESTful API for tracking the International Space Station (ISS) in real-time, p
 
 - Real-time ISS position tracking
 - Velocity and trajectory calculations
-- Pass times prediction for any location
 - Clean RESTful API design
 - Modular architecture (routes, controllers, services, utils)
 - Proper error handling
@@ -86,40 +85,6 @@ Returns position, velocity, altitude, and predicted trajectory.
 }
 ```
 
-#### 3. Get Pass Times
-
-```http
-GET /api/iss/passes?lat=45.0&lon=-93.0&alt=0&n=5
-```
-
-**Query Parameters:**
-
-- `lat` (required): Latitude (-90 to 90)
-- `lon` (required): Longitude (-180 to 180)
-- `alt` (optional): Observer altitude in meters (default: 0)
-- `n` (optional): Number of passes to return (default: 5)
-
-**Response:**
-
-```json
-{
-  "success": true,
-  "data": {
-    "request": {
-      "latitude": 45.0,
-      "longitude": -93.0,
-      "altitude": 0,
-      "passes": 5
-    },
-    "passes": [
-      {
-        "risetime": 1733590800,
-        "duration": 420
-      }
-    ]
-  }
-}
-```
 
 #### 4. Health Check
 
@@ -155,7 +120,6 @@ Check if the ISS API service is operational.
 
 The server uses `nodemon` for automatic restart on file changes:
 
-
 ## Technologies
 
 - **Express.js** - Web framework
@@ -169,7 +133,6 @@ The server uses `nodemon` for automatic restart on file changes:
 This service uses the [Open Notify API](http://open-notify.org/):
 
 - ISS Position: `http://api.open-notify.org/iss-now.json`
-- ISS Pass Times: `http://api.open-notify.org/iss-pass.json`
 
 ## Error Handling
 

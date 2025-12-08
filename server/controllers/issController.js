@@ -3,10 +3,8 @@ import {
   calculateVelocity,
   predictTrajectory,
   formatTimestamp,
-  validateCoordinates,
 } from "../utils/calculations.js";
 import { HTTP_STATUS } from "../config/constants.js";
-
 
 /**
  * Get current ISS position
@@ -74,54 +72,6 @@ export const getTrackingData = async (req, res) => {
         altitude: velocity.altitude,
         trajectory,
       },
-    });
-  } catch (error) {
-    res.status(HTTP_STATUS.SERVICE_UNAVAILABLE).json({
-      success: false,
-      error: error.message,
-    });
-  }
-};
-
-/**
- * Get ISS pass times for a specific location
- * @route GET /api/iss/passes
- * @queryParam {number} lat - Latitude
- * @queryParam {number} lon - Longitude
- * @queryParam {number} alt - Altitude in meters (optional)
- * @queryParam {number} n - Number of passes (optional, default: 5)
- */
-export const getPassTimes = async (req, res) => {
-  try {
-    const { lat, lon, alt = 0, n = 5 } = req.query;
-
-    // Validate required parameters
-    if (!lat || !lon) {
-      return res.status(HTTP_STATUS.BAD_REQUEST).json({
-        success: false,
-        error: "Latitude and longitude are required",
-      });
-    }
-
-    // Validate coordinates
-    if (!validateCoordinates(lat, lon)) {
-      return res.status(HTTP_STATUS.BAD_REQUEST).json({
-        success: false,
-        error:
-          "Invalid coordinates. Latitude must be between -90 and 90, longitude between -180 and 180",
-      });
-    }
-
-    const passData = await issService.getPassTimes(
-      parseFloat(lat),
-      parseFloat(lon),
-      parseInt(alt) || 0,
-      parseInt(n) || 5
-    );
-
-    res.status(HTTP_STATUS.OK).json({
-      success: true,
-      data: passData,
     });
   } catch (error) {
     res.status(HTTP_STATUS.SERVICE_UNAVAILABLE).json({

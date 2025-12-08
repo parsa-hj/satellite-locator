@@ -38,7 +38,6 @@ app.get("/", (req, res) => {
       iss: {
         position: "/api/iss/position",
         tracking: "/api/iss/tracking",
-        passes: "/api/iss/passes?lat=<LAT>&lon=<LON>",
         health: "/api/iss/health",
       },
     },

@@ -1,6 +1,5 @@
 export const API_CONFIG = {
   ISS_NOW_URL: "http://api.open-notify.org/iss-now.json",
-  ISS_PASS_URL: "http://api.open-notify.org/iss-pass.json",
   REQUEST_TIMEOUT: 5000, // 5 seconds
 };
 
