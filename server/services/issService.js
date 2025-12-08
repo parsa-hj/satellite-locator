@@ -7,6 +7,10 @@ import { API_CONFIG } from "../config/constants.js";
  */
 
 class ISSService {
+  constructor() {
+    // in-memory cache for last fetched position to compute velocity without multiple API calls
+    this._lastPosition = null;
+  }
   /**
    * Fetch current ISS position from Open Notify API
    * @returns {Promise<Object>} ISS position data with timestamp, latitude, and longitude
@@ -36,6 +40,20 @@ class ISSService {
       }
       throw new Error(`Failed to fetch ISS position: ${error.message}`);
     }
+  }
+
+  /**
+   * Fetch current position and return previous cached position (if any).
+   * This allows the controller to compute velocity from two recent samples
+   * without waiting multiple seconds for sequential samples.
+   * @returns {Promise<{ previous: Object|null, current: Object }>}
+   */
+  async fetchPositionAndReturnPrev() {
+    const previous = this._lastPosition;
+    const current = await this.getCurrentPosition();
+    // update cache
+    this._lastPosition = current;
+    return { previous, current };
   }
 
   /**

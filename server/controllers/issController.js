@@ -39,14 +39,12 @@ export const getPosition = async (req, res) => {
  */
 export const getTrackingData = async (req, res) => {
   try {
-    // Collect multiple position samples for velocity calculation
-    const positions = await issService.getPositionSamples(3, 2000);
+    // Fetch current position and previous cached position (fast)
+    const { previous, current } = await issService.fetchPositionAndReturnPrev();
 
-    if (positions.length === 0) {
-      throw new Error("No position data available");
-    }
+    const positions = previous ? [previous, current] : [current];
 
-    const currentPosition = positions[positions.length - 1];
+    const currentPosition = current;
     const velocity = calculateVelocity(positions);
     const trajectory = predictTrajectory(
       currentPosition.latitude,
