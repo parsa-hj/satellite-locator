@@ -6,6 +6,7 @@ import {
   GlobalOutlined,
   ArrowRightOutlined,
 } from "@ant-design/icons";
+import Facts from "../components/Facts";
 import { useNavigate } from "react-router-dom";
 
 const { Content } = Layout;
@@ -108,6 +109,11 @@ function Dashboard() {
             </Col>
           ))}
         </Row>
+
+        {/* Facts Widget (rotating on refresh) */}
+        <div style={{ marginTop: 40, marginBottom: 40 }}>
+          <Facts />
+        </div>
 
         {/* Info Section */}
         <Card
