@@ -1,6 +1,6 @@
 # ISS Locator
 
-A modern, real-time tracking application for the International Space Station (ISS). Track the ISS position, velocity, and altitude on an interactive map.
+A real-time tracking application for the International Space Station (ISS). Track the ISS position, velocity, and altitude on an interactive map.
 
 ## Quick Start
 
@@ -100,6 +100,7 @@ satellite-locator/
 - `GET /api/iss/position` - Current ISS position (lat/lon)
 - `GET /api/iss/tracking` - Full tracking data (position + velocity + trajectory)
 - `GET /api/iss/health` - API health check
+- `GET /api/crew` - Current ISS crew members
 
 ## Documentation
 

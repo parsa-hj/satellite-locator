@@ -6,6 +6,7 @@ import {
   DashboardOutlined,
   EnvironmentOutlined,
   InfoCircleOutlined,
+  TeamOutlined,
 } from "@ant-design/icons";
 
 const { Header } = Layout;
@@ -23,6 +24,11 @@ const Navbar = () => {
       key: "/tracking",
       icon: <EnvironmentOutlined />,
       label: <Link to="/tracking">ISS Tracker</Link>,
+    },
+    {
+      key: "/crew",
+      icon: <TeamOutlined />,
+      label: <Link to="/crew">Crew</Link>,
     },
     {
       key: "/about",

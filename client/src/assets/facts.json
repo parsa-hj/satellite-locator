@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "fact": "The ISS travels at about 28,000 kilometers per hour (17,500 miles per hour), orbiting Earth roughly every 90 minutes.",
+    "source": "NASA"
+  },
+  {
+    "id": 2,
+    "fact": "Astronauts aboard the ISS see about 16 sunrises and sunsets each day.",
+    "source": "NASA"
+  },
+  {
+    "id": 3,
+    "fact": "The ISS is roughly the size of a football field — about 73 meters by 109 meters (including solar arrays).",
+    "source": "NASA"
+  },
+  {
+    "id": 4,
+    "fact": "The first module of the ISS was launched in 1998 and the station has been continuously occupied since November 2000.",
+    "source": "NASA"
+  },
+  {
+    "id": 5,
+    "fact": "Water aboard the ISS is recycled — urine, sweat, and cabin condensate are reclaimed to produce drinking water.",
+    "source": "NASA"
+  },
+  {
+    "id": 6,
+    "fact": "The station’s solar arrays generate more than 100 kilowatts of electricity — enough power for about 40 average homes.",
+    "source": "NASA"
+  },
+  {
+    "id": 7,
+    "fact": "Microgravity experiments on the ISS help scientists study things that are difficult or impossible on Earth, from protein crystals to combustion.",
+    "source": "NASA"
+  },
+  {
+    "id": 8,
+    "fact": "The ISS orbits at an altitude between about 400 and 420 kilometers (approximately 250 miles) above Earth.",
+    "source": "NASA"
+  },
+  {
+    "id": 9,
+    "fact": "The station is a collaboration between five space agencies: NASA (USA), Roscosmos (Russia), JAXA (Japan), ESA (Europe), and CSA (Canada).",
+    "source": "NASA"
+  },
+  {
+    "id": 10,
+    "fact": "The cupola is a seven-windowed observatory module on the ISS used for viewing Earth and robotic operations.",
+    "source": "NASA"
+  },
+  {
+    "id": 11,
+    "fact": "Food on the ISS is specially packaged; some foods are rehydrated, some are thermostabilized, and many are familiar to crews.",
+    "source": "NASA"
+  },
+  {
+    "id": 12,
+    "fact": "The ISS supports educational outreach — students around the world can talk to astronauts and run experiments.",
+    "source": "NASA"
+  }
+]

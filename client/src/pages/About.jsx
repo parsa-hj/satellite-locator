@@ -57,8 +57,8 @@ function About() {
                 <li>Real-time ISS position tracking with auto-refresh</li>
                 <li>Interactive world map with ISS marker and trajectory</li>
                 <li>Live orbital data: speed, altitude, direction</li>
-                <li>Predicted trajectory visualization</li>
                 <li>Responsive design for mobile and desktop</li>
+                <li></li>
               </ul>
             </div>
 

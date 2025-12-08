@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout, Space, Alert, Spin, Button, Typography } from "antd";
+import { Layout, Space, Alert, Spin, Button, Typography, Row, Col } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
 import ISSMap from "../components/ISSMap";
 import ISSStats from "../components/ISSStats";
@@ -76,12 +76,46 @@ function Tracking() {
         {/* Main Content */}
         {data && (
           <>
-            {/* Map */}
-            <div>
-              <ISSMap position={data.position} trajectory={data.trajectory} />
-            </div>
+            <Row gutter={[24, 24]}>
+              {/* Left: Live ISS video */}
+              <Col xs={24} md={12}>
+                <div
+                  style={{
+                    borderRadius: 8,
+                    overflow: "hidden",
+                    background: "#000",
+                    height: "500px",
+                  }}
+                >
+                  <iframe
+                    title="Live ISS Video"
+                    src="https://www.youtube.com/embed/fO9e9jnhYK8"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    style={{ width: "100%", height: "100%", border: 0 }}
+                  />
+                </div>
+              </Col>
 
-            {/* Stats */}
+              {/* Right: Map */}
+              <Col xs={24} md={12}>
+                <div
+                  style={{
+                    width: "100%",
+                    height: "500px",
+                    borderRadius: 8,
+                    overflow: "hidden",
+                  }}
+                >
+                  <ISSMap
+                    position={data.position}
+                    trajectory={data.trajectory}
+                  />
+                </div>
+              </Col>
+            </Row>
+
+            {/* Stats below map/video */}
             <div>
               <ISSStats data={data} />
             </div>
