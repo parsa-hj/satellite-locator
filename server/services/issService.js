@@ -1,0 +1,97 @@
+import axios from "axios";
+import { API_CONFIG } from "../config/constants.js";
+
+/**
+ * Service layer for ISS-related API calls
+ * Handles all external API communications with error handling
+ */
+
+class ISSService {
+  constructor() {
+    // in-memory cache for last fetched position to compute velocity without multiple API calls
+    this._lastPosition = null;
+    this._lastFetchTime = null;
+  }
+  /**
+   * Fetch current ISS position from Open Notify API
+   * @returns {Promise<Object>} ISS position data with timestamp, latitude, and longitude
+   * @throws {Error} If API call fails
+   */
+  async getCurrentPosition() {
+    try {
+      const response = await axios.get(API_CONFIG.ISS_NOW_URL, {
+        timeout: API_CONFIG.REQUEST_TIMEOUT,
+      });
+
+      if (response.data.message !== "success") {
+        throw new Error("Invalid response from ISS API");
+      }
+
+      return {
+        timestamp: response.data.timestamp,
+        latitude: parseFloat(response.data.iss_position.latitude),
+        longitude: parseFloat(response.data.iss_position.longitude),
+      };
+    } catch (error) {
+      if (error.code === "ECONNABORTED") {
+        throw new Error("ISS API request timeout");
+      }
+      if (error.response) {
+        throw new Error(`ISS API error: ${error.response.status}`);
+      }
+      throw new Error(`Failed to fetch ISS position: ${error.message}`);
+    }
+  }
+
+  /**
+   * Fetch current position and return previous cached position (if any).
+   * This allows the controller to compute velocity from two recent samples
+   * without waiting multiple seconds for sequential samples.
+   * If we need to wait for better data (positions too close), this method handles it.
+   * @returns {Promise<{ previous: Object|null, current: Object }>}
+   */
+  async fetchPositionAndReturnPrev() {
+    const now = Date.now();
+    const previous = this._lastPosition;
+
+    // If we have a cached position but it's very recent (< 3 seconds old),
+    // wait a bit before fetching new data to ensure meaningful velocity calculation
+    if (previous && this._lastFetchTime && now - this._lastFetchTime < 3000) {
+      await new Promise((resolve) =>
+        setTimeout(resolve, 3000 - (now - this._lastFetchTime))
+      );
+    }
+
+    const current = await this.getCurrentPosition();
+
+    // update cache
+    this._lastPosition = current;
+    this._lastFetchTime = Date.now();
+
+    return { previous, current };
+  }
+
+  /**
+   * Fetch multiple position samples for trajectory calculation
+   * @param {number} samples - Number of samples to collect (default: 3)
+   * @param {number} interval - Interval between samples in ms (default: 2000)
+   * @returns {Promise<Array>} Array of position samples
+   */
+  async getPositionSamples(samples = 3, interval = 2000) {
+    const positions = [];
+
+    for (let i = 0; i < samples; i++) {
+      const position = await this.getCurrentPosition();
+      positions.push(position);
+
+      // Wait before next sample (except for last iteration)
+      if (i < samples - 1) {
+        await new Promise((resolve) => setTimeout(resolve, interval));
+      }
+    }
+
+    return positions;
+  }
+}
+
+export default new ISSService();
