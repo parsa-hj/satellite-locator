@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Dashboard from "./pages/Dashboard";
 import About from "./pages/About";
 import Tracking from "./pages/Tracking";
+import Crew from "./pages/Crew";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/about" element={<About />} />
           <Route path="/tracking" element={<Tracking />} />
+          <Route path="/crew" element={<Crew />} />
           <Route
             path="*"
             element={

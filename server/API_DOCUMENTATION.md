@@ -85,7 +85,6 @@ Returns position, velocity, altitude, and predicted trajectory.
 }
 ```
 
-
 #### 4. Health Check
 
 ```http
@@ -93,6 +92,45 @@ GET /api/iss/health
 ```
 
 Check if the ISS API service is operational.
+
+### Crew Endpoints
+
+#### Get Current ISS Crew
+
+```http
+GET /api/crew
+```
+
+Returns the list of astronauts currently aboard the International Space Station. The server fetches data from the Open Notify `astros.json` endpoint and filters results to those with `craft: "ISS"`.
+
+**Example Request:**
+
+```bash
+curl http://localhost:5000/api/crew
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "crew": [
+      { "craft": "ISS", "name": "Oleg Kononenko" },
+      { "craft": "ISS", "name": "Nikolai Chub" },
+      { "craft": "ISS", "name": "Tracy Caldwell Dyson" },
+      { "craft": "ISS", "name": "Matthew Dominick" },
+      { "craft": "ISS", "name": "Michael Barratt" },
+      { "craft": "ISS", "name": "Jeanette Epps" },
+      { "craft": "ISS", "name": "Alexander Grebenkin" },
+      { "craft": "ISS", "name": "Butch Wilmore" },
+      { "craft": "ISS", "name": "Sunita Williams" }
+    ],
+    "total": 9,
+    "timestamp": "2025-12-07T12:34:56.789Z"
+  }
+}
+```
 
 ## Installation
 
