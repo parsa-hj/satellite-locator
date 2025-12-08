@@ -1,6 +1,7 @@
 {
   "name": "api-project",
   "version": "1.0.0",
+  "type": "module",
   "description": "An API project using Express.js and Node.js",
   "main": "index.js",
   "scripts": {
