@@ -59,17 +59,30 @@ export const calculateBearing = (lat1, lon1, lat2, lon2) => {
  * @returns {Object} Velocity data including speed and direction
  */
 export const calculateVelocity = (positions) => {
+  // Return default values if insufficient data
   if (positions.length < 2) {
     return {
       speed: ISS_CONSTANTS.ORBITAL_SPEED,
       speedKmh: ISS_CONSTANTS.ORBITAL_SPEED * 3600,
-      direction: 0,
+      direction: null, // Changed from 0 to null to indicate unknown
       altitude: ISS_CONSTANTS.ORBITAL_ALTITUDE,
     };
   }
 
   const first = positions[0];
   const last = positions[positions.length - 1];
+
+  const timeDiff = last.timestamp - first.timestamp; // in seconds
+
+  // If time difference is too small (< 1 second), use default values
+  if (timeDiff < 1) {
+    return {
+      speed: ISS_CONSTANTS.ORBITAL_SPEED,
+      speedKmh: ISS_CONSTANTS.ORBITAL_SPEED * 3600,
+      direction: null,
+      altitude: ISS_CONSTANTS.ORBITAL_ALTITUDE,
+    };
+  }
 
   const distance = calculateDistance(
     first.latitude,
@@ -78,7 +91,6 @@ export const calculateVelocity = (positions) => {
     last.longitude
   );
 
-  const timeDiff = last.timestamp - first.timestamp; // in seconds
   const speed = distance / timeDiff; // km/s
   const speedKmh = speed * 3600; // km/h
 

@@ -10,6 +10,7 @@ class ISSService {
   constructor() {
     // in-memory cache for last fetched position to compute velocity without multiple API calls
     this._lastPosition = null;
+    this._lastFetchTime = null;
   }
   /**
    * Fetch current ISS position from Open Notify API
@@ -46,13 +47,27 @@ class ISSService {
    * Fetch current position and return previous cached position (if any).
    * This allows the controller to compute velocity from two recent samples
    * without waiting multiple seconds for sequential samples.
+   * If we need to wait for better data (positions too close), this method handles it.
    * @returns {Promise<{ previous: Object|null, current: Object }>}
    */
   async fetchPositionAndReturnPrev() {
+    const now = Date.now();
     const previous = this._lastPosition;
+
+    // If we have a cached position but it's very recent (< 3 seconds old),
+    // wait a bit before fetching new data to ensure meaningful velocity calculation
+    if (previous && this._lastFetchTime && now - this._lastFetchTime < 3000) {
+      await new Promise((resolve) =>
+        setTimeout(resolve, 3000 - (now - this._lastFetchTime))
+      );
+    }
+
     const current = await this.getCurrentPosition();
+
     // update cache
     this._lastPosition = current;
+    this._lastFetchTime = Date.now();
+
     return { previous, current };
   }
 

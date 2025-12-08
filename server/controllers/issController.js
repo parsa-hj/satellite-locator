@@ -46,12 +46,17 @@ export const getTrackingData = async (req, res) => {
 
     const currentPosition = current;
     const velocity = calculateVelocity(positions);
-    const trajectory = predictTrajectory(
-      currentPosition.latitude,
-      currentPosition.longitude,
-      velocity.direction,
-      10
-    );
+
+    // Only predict trajectory if we have a valid direction
+    const trajectory =
+      velocity.direction !== null
+        ? predictTrajectory(
+            currentPosition.latitude,
+            currentPosition.longitude,
+            velocity.direction,
+            10
+          )
+        : [];
 
     res.status(HTTP_STATUS.OK).json({
       success: true,
