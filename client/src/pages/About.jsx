@@ -76,13 +76,6 @@ function About() {
               </Paragraph>
             </div>
 
-            <Divider />
-
-            <div style={{ textAlign: "center" }}>
-              <Paragraph type="secondary">
-                Built with ❤️ for space enthusiasts and developers
-              </Paragraph>
-            </div>
           </Space>
         </Card>
       </div>
